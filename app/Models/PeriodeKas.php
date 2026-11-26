@@ -15,6 +15,7 @@ class PeriodeKas extends Model
         'tanggal_tutup',
     ];
 
+    /** @return array<string, string> */
     protected function casts(): array
     {
         return [
@@ -23,6 +24,7 @@ class PeriodeKas extends Model
         ];
     }
 
+    /** @return HasMany<Transaksi, $this> */
     public function transaksi(): HasMany
     {
         return $this->hasMany(Transaksi::class);
