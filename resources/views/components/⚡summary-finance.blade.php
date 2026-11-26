@@ -64,7 +64,7 @@ new #[Title('Dashboard')] class extends Component
             ->toBase()
             ->where('tanggal', '>=', $mulai->toDateString())
             ->where('tanggal', '<', today()->startOfMonth()->addMonth()->toDateString())
-            ->selectRaw("DATE_FORMAT(tanggal, '%Y-%m') AS bulan")
+            ->selectRaw('SUBSTR(tanggal, 1, 7) AS bulan') // "2026-11"; jalan di MySQL dan SQLite
             ->selectRaw(
                 "COALESCE(SUM(CASE WHEN akun_tujuan_id IN ($tanda)
                     AND (akun_asal_id IS NULL OR akun_asal_id NOT IN ($tanda)) THEN nominal ELSE 0 END), 0) AS masuk",
