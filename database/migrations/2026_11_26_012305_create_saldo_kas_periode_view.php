@@ -12,8 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // DROP lalu CREATE (bukan CREATE OR REPLACE) supaya juga jalan di SQLite yang dipakai saat testing.
+        DB::statement('DROP VIEW IF EXISTS saldo_kas_periode');
         DB::statement(<<<'SQL'
-            CREATE OR REPLACE VIEW saldo_kas_periode AS
+            CREATE VIEW saldo_kas_periode AS
             SELECT
                 r.periode_id,
                 r.nama,
